@@ -1,0 +1,32 @@
+name: auto-run
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '30 5 * * *'
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print CI Environments
+        run: |
+          echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+          echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+          echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Python Env
+        run: |
+          chmod +x run.sh
+          ./run.sh
+      - name: run-test
+        run: |
+          python3 pytorch_models_benchmark.py
+
+
+      - name: Print Job Status
+        run: echo "🍏 This job's status is ${{ job.status }}."

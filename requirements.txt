@@ -1,0 +1,12 @@
+# pre-commit hooks
+pre-commit
+black
+isrot
+ppylint
+
+# pytorch
+torch
+torchvision
+
+# profile
+thop
