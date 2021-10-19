@@ -1,7 +1,7 @@
 # pre-commit hooks
 pre-commit
 black
-isrot
+isort
 ppylint
 
 # pytorch
