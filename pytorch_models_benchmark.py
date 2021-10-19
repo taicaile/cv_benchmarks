@@ -23,7 +23,7 @@ for name in model_names:
 md_file = []
 md_file.append("# Pytorch Models Evaluation Results\n")
 md_file.append("Input |Model | Params(M) | GLOPs(G)")
-md_file.append("---|---|---|---")
+md_file.append("|:---:|:---:|:---:|:---:|")
 
 DEVICE = "cpu"
 if torch.cuda.is_available():
