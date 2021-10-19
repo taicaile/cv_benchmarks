@@ -35,3 +35,22 @@ if [ -f "$REQUIREMENTS" ] ; then
     $PIP install -r "$REQUIREMENTS" -q
 fi
 echo "-------------------------------------"
+
+# run python script
+echo "run python script"
+python3 pytorch_models_benchmark.py
+echo "-------------------------------------"
+
+# cat readme.md
+echo "cat readme.md"
+cat readme.md
+echo "-------------------------------------"
+
+# commit file
+if [[ -n "${git status -s}" ]]; then
+    git add readme.md
+    # run pre-commit
+    pre-commit run --all-files
+    git add readme.md
+    git commit -m "update"
+fi
