@@ -2,7 +2,7 @@
 pre-commit
 black
 isort
-ppylint
+pylint
 
 # pytorch
 torch
