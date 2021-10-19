@@ -27,6 +27,7 @@ echo "python: " `which $PYTHON`
 echo "-------------------------------------"
 
 # requirements install
+echo "Requirements installation"
 PIP="$PYTHON -m pip"
 $PIP install pip wheel -U -q
 # install requirements.txt if exists
@@ -38,7 +39,7 @@ echo "-------------------------------------"
 
 # run python script
 echo "run python script"
-python3 pytorch_models_benchmark.py
+$PYTHON pytorch_models_benchmark.py
 echo "-------------------------------------"
 
 # cat readme.md
@@ -47,10 +48,11 @@ cat readme.md
 echo "-------------------------------------"
 
 # commit file
-if [[ -n "${git status -s}" ]]; then
+if [[ -n "$(git status -s)" ]]; then
     git add readme.md
     # run pre-commit
     pre-commit run --all-files
     git add readme.md
     git commit -m "update"
 fi
+echo "-------------------------------------"
