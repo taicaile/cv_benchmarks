@@ -47,6 +47,11 @@ echo "cat readme.md"
 cat readme.md
 echo "-------------------------------------"
 
+# set git user name and email
+echo "Set git user name, and email"
+git config  --global user.name 'github-actions[bot]'
+git config  --global user.email 'github-actions[bot]@users.noreply.github.com'
+
 # commit file
 if [[ -n "$(git status -s)" ]]; then
     git add readme.md
@@ -54,5 +59,6 @@ if [[ -n "$(git status -s)" ]]; then
     pre-commit run --all-files
     git add readme.md
     git commit -m "update"
+    git push
 fi
 echo "-------------------------------------"
