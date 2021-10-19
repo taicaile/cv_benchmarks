@@ -21,7 +21,7 @@ DEVICE = "cpu"
 if torch.cuda.is_available():
     DEVICE = "cuda"
 
-for name in model_names[:1]:
+for name in model_names:
     model = torchvision.models.__dict__[name]().to(DEVICE)
     dsize = (1, 3, 224, 224)
     if "inception" in name:
