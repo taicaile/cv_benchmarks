@@ -26,6 +26,7 @@ jobs:
       - name: run-test
         run: |
           python3 pytorch_models_benchmark.py
+          cat readme.md
 
 
       - name: Print Job Status
