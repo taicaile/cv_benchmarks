@@ -52,13 +52,18 @@ echo "Set git user name, and email"
 git config  --global user.name 'github-actions[bot]'
 git config  --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-# commit file
-if [[ -n "$(git status -s)" ]]; then
-    git add readme.md
-    # run pre-commit
-    pre-commit run --all-files
-    git add readme.md
-    git commit -m "update"
+README=readme.md
+# try to commit $README
+git add $README
+# run pre-commit
+pre-commit run --files $README
+if [[ -n "$(git status -s | grep $README)" ]]
+then
+    git commit -m "update at `date`"
     git push
+    echo "updates have been pushed"
+else
+    echo "no updates"
 fi
+
 echo "-------------------------------------"
