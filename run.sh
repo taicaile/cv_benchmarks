@@ -42,22 +42,24 @@ echo "run python script"
 $PYTHON cv_benchmarks.py
 echo "-------------------------------------"
 
-# cat readme.md
-echo "cat readme.md"
-cat readme.md
-echo "-------------------------------------"
-
 # set git user name and email
 echo "Set git user name, and email"
 git config  --global user.name 'github-actions[bot]'
 git config  --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-README=readme.md
-# try to commit $README
-git add $README
+# commit index.html
+INDEX=index.html
+touch .nojekyll
+git checkout -b gh-pages
+git add .nojekyll $INDEX
+git commit -m "update"
+
+git push blog gh-pages -f
+
 # run pre-commit
-pre-commit run --files $README
-if [[ -n "$(git status -s | grep $README)" ]]
+pre-commit run --files $INDEX
+
+if [[ -n "$(git status -s | grep $INDEX)" ]]
 then
     git commit -m "update at $(date)"
     git push
