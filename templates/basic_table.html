@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% block content %}
+<table id="data" class="table table-striped">
+  <thead>
+    <tr>
+      <th>Input</th>
+      <th>Model</th>
+      <th>Params(M)</th>
+      <th>GLOPs(G)</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for model in models %}
+    <tr>
+      <td>{{ model.input }}</td>
+      <td>{{ model.name }}</td>
+      <td>{{ model.params }}</td>
+      <td>{{ model.glops }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %} {% block scripts %}
+<script>
+  $(document).ready(function () {
+    $("#data").DataTable({
+      columns: [
+        { orderable: true, searchable: true },
+        { orderable: true, searchable: true },
+        { orderable: true, searchable: true },
+        { orderable: true, searchable: true },
+      ],
+    });
+  });
+</script>
+{% endblock %}

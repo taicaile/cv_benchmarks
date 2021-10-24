@@ -5,7 +5,7 @@ from typing import Iterable
 from jinja2 import Environment, FileSystemLoader
 
 env = Environment(loader=FileSystemLoader("templates"))
-template = env.get_template("table.html")
+template = env.get_template("basic_table.html")
 
 
 @dataclass
