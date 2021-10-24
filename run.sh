@@ -49,16 +49,16 @@ git config  --global user.email 'github-actions[bot]@users.noreply.github.com'
 
 # commit index.html
 INDEX=index.html
-touch .nojekyll
 git checkout --orphan gh-pages
+touch .nojekyll
 git add .nojekyll $INDEX -f
 # run pre-commit
-pre-commit run --files $INDEX
+pre-commit run --files .nojekyll $INDEX
 git add .nojekyll $INDEX -f
 
 if [[ -n "$(git status -s | grep $INDEX)" ]]
 then
-    git commit -m "update at $(date)"
+    git commit -a -m "update at $(date)"
     git push origin gh-pages -f
     echo "updates have been pushed"
 else
