@@ -50,7 +50,7 @@ git config  --global user.email 'github-actions[bot]@users.noreply.github.com'
 # commit index.html
 INDEX=index.html
 touch .nojekyll
-git checkout -b gh-pages
+git checkout --orphan gh-pages
 git add .nojekyll $INDEX -f
 # run pre-commit
 pre-commit run --files $INDEX
