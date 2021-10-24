@@ -51,10 +51,10 @@ git config  --global user.email 'github-actions[bot]@users.noreply.github.com'
 INDEX=index.html
 touch .nojekyll
 git checkout -b gh-pages
-git add .nojekyll $INDEX
+git add .nojekyll $INDEX -f
 # run pre-commit
 pre-commit run --files $INDEX
-git add .nojekyll $INDEX
+git add .nojekyll $INDEX -f
 
 if [[ -n "$(git status -s | grep $INDEX)" ]]
 then
