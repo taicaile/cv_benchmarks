@@ -7,10 +7,10 @@ echo "-------------------------------------"
 
 # check git infomation
 echo "Check git configuration"
-echo "git user.name : `git config user.name`"
-echo "git user.email: `git config user.email`"
-echo "current working directory: `pwd`"
-echo "`ls -a`"
+echo "git user.name : $(git config user.name)"
+echo "git user.email: $(git config user.email)"
+echo "current working directory: $(pwd)"
+ls -a
 echo "-------------------------------------"
 
 # Check system info
@@ -23,7 +23,7 @@ echo "-------------------------------------"
 PYTHON=python3
 echo "$PYTHON installation"
 sudo apt -qq install $PYTHON -y
-echo "python: " `which $PYTHON`
+echo "python: $(which $PYTHON)"
 echo "-------------------------------------"
 
 # requirements install
@@ -39,7 +39,7 @@ echo "-------------------------------------"
 
 # run python script
 echo "run python script"
-$PYTHON pytorch_models_benchmark.py
+$PYTHON cv_benchmarks.py
 echo "-------------------------------------"
 
 # cat readme.md
@@ -59,7 +59,7 @@ git add $README
 pre-commit run --files $README
 if [[ -n "$(git status -s | grep $README)" ]]
 then
-    git commit -m "update at `date`"
+    git commit -m "update at $(date)"
     git push
     echo "updates have been pushed"
 else
