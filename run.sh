@@ -52,17 +52,14 @@ INDEX=index.html
 touch .nojekyll
 git checkout -b gh-pages
 git add .nojekyll $INDEX
-git commit -m "update"
-
-git push blog gh-pages -f
-
 # run pre-commit
 pre-commit run --files $INDEX
+git add .nojekyll $INDEX
 
 if [[ -n "$(git status -s | grep $INDEX)" ]]
 then
     git commit -m "update at $(date)"
-    git push
+    git push origin gh-pages -f
     echo "updates have been pushed"
 else
     echo "no updates"
