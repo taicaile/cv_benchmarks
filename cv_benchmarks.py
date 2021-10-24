@@ -6,6 +6,8 @@ import torch
 from thop.profile import profile
 from torchvision import models
 
+from generate import ModelDict, render
+
 model_names = sorted(
     name
     for name, obj in models.__dict__.items()
@@ -20,10 +22,7 @@ print("found the following models from torchvision.models")
 for name in model_names:
     print(f"{name}")
 
-md_file = []
-md_file.append("# Pytorch Models Evaluation Results\n")
-md_file.append("Input |Model | Params(M) | GLOPs(G)")
-md_file.append("|:---:|:---:|:---:|:---:|")
+model_dicts = []
 
 DEVICE = "cpu"
 if torch.cuda.is_available():
@@ -37,11 +36,14 @@ for name in model_names:
     inputs = torch.randn(dsize).to(DEVICE)
     total_ops, total_params = profile(model, (inputs,), verbose=False)
 
-    md_file.append(
-        f"{str(dsize)} |{name} | {total_params / (1000 ** 2):.2f} | {total_ops / (1000 ** 3):.2f}"
+    model_dicts.append(
+        ModelDict(
+            str(dsize),
+            name,
+            f"{total_params / (1000 ** 2):.2f}",
+            f"{total_ops / (1000 ** 3):.2f}",
+        )
     )
 
-md_file.append("")
-
-with open("readme.md", "w+", encoding="utf-8") as file:
-    file.write("\n".join(md_file))
+TITLE = "Computer Vision Models Evaluation"
+render(models=model_dicts, title=TITLE)
